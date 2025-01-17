@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scamexit</title>
+    <link rel="stylesheet" href="design/style.css">
+</head>
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="background-video">
+        <source src="assets/background.mp4" type="video/mp4">
+    </video>
+
+    <!-- Music -->
+    <audio id="background-music" loop>
+        <source src="https://r2-bios.e-z.host/83207551-6b72-4f4c-8866-d3bc38b7317e/l99xsjnbtl.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Overlay with Click to Enter -->
+    <div class="overlay" id="overlay">
+        <span>[Hey! Click To Enter]</span>
+    </div>
+
+    <!-- Hidden content to show after clicking -->
+    <div class="content" id="content">
+        <div class="profile-container">
+            <!-- Avatar and Decor -->
+            <div class="avatar-container">
+                <img src="assets/avatar.gif" alt="scamexit Avatar" class="avatar">
+                <div class="decor-container">
+                    <img src="assets/decor.gif" alt="Decor" />
+                </div>
+            </div>
+
+            <!-- Username and UID Hover -->
+            <div class="username">
+                scamexit
+                <div class="uid">UID: 0</div> <!-- UID that shows on hover -->
+            </div>
+
+            <!-- Badges -->
+            <div class="badges-container">
+                <div class="badge" title="Owner">
+                    <img src="assets/owner.png" alt="Owner Badge">
+                    <div class="badge-name">Owner Badge</div>
+                </div>
+                <div class="badge" title="Dev">
+                    <img src="assets/dev.png" alt="Developer Badge">
+                    <div class="badge-name">Dev Badge</div>
+                </div>
+                <div class="badge" title="Staff">
+                    <img src="assets/staff.png" alt="Staff Badge">
+                    <div class="badge-name">Staff Badge</div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <p class="profile-description"></p>
+
+            <!-- White Line -->
+            <div class="line"></div>
+
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <div class="icon" onclick="window.open('https://github.com/yourhandle', '_blank');">
+                    <img src="assets/github.png" alt="GitHub">
+                    <div class="social-name">GitHub</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+
+</body>
+</html>
