@@ -4,7 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scamexit</title>
-    <link rel="stylesheet" href="design/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+            cursor: url('assets/cursor.gif'), auto; /* Custom Cursor */
+        }
+
+        /* Ensure all clickable elements use the custom cursor */
+        .badge, .social-icons .icon, .username, .overlay {
+            cursor: url('assets/cursor.gif'), auto; /* Custom Cursor */
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+            filter: blur(5px);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
+
+        .overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            display: none;
+            color: white;
+        }
+
+        .profile-container {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            width: 150px; /* Original avatar size */
+            height: 150px; /* Original avatar size */
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .decor-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px; /* Match decor size with avatar size */
+            height: 150px; /* Match decor size with avatar size */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .decor-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 2.5rem;
+            margin-top: 5px;
+            text-transform: capitalize;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            cursor: url('assets/cursor.gif'), auto; /* Custom Cursor */
+        }
+
+        .uid {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .username:hover .uid {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            position: relative;
+            display: inline-block;
+            width: 40px; /* Badge size */
+            height: 40px; /* Badge size */
+            border-radius: 5px;
+            cursor: url('assets/cursor.gif'), auto; /* Custom Cursor */
+            transition: transform 0.3s ease;
+        }
+
+        .badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge-name {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .badge:hover .badge-name {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-5px); /* Badge move up animation */
+        }
+
+        .profile-description {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .line {
+            width: 80%;
+            height: 2px;
+            background-color: white;
+            margin: 20px auto;
+        }
+
+        /* Social Media Icons Styling */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .social-icons .icon {
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            cursor: url('assets/cursor.gif'), auto; /* Custom Cursor */
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons .icon:hover img {
+            transform: scale(1.1);
+        }
+
+        .social-icons .icon:hover {
+            transform: translateY(-5px); /* Socials move up animation */
+        }
+
+        /* Social Media Name Styling */
+        .social-icons .icon .social-name {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .social-icons .icon:hover .social-name {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -72,7 +336,19 @@
         </div>
     </div>
 
-    <script src="scripts/script.js"></script>
+    <script>
+        // Redirect to https://exit.rip if the URL has any path
+        if (window.location.hostname === 'exit.rip' && window.location.pathname !== '/') {
+            window.location.href = 'https://exit.rip';  // Redirect to the homepage
+        }
+
+        // When the user clicks to enter
+        document.querySelector('#overlay').addEventListener('click', function() {
+            this.classList.add('hidden');
+            document.querySelector('#content').style.display = 'block';
+            document.querySelector('#background-music').play(); // Start the music automatically
+        });
+    </script>
 
 </body>
 </html>
