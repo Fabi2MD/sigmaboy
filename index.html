@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>scamexit</title>
+    <title>scamexit or scamex1t</title>
 
-    <!-- AMP Auto Ads Script -->
-    <script async custom-element="amp-auto-ads"
-            src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335" crossorigin="anonymous"></script>
+
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
     <style>
         * {
@@ -262,14 +261,91 @@
                 opacity: 1;
             }
         }
+
+        .left-ad, .right-ad, .top-ad, .bottom-ad {
+            z-index: 9999;
+        }
+
+        .left-ad {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .right-ad {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .top-ad {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .bottom-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
-    <!-- AMP Auto Ads Code -->
-    <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-3636190139881335">
-    </amp-auto-ads>
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-3636190139881335"></amp-auto-ads>
+
+    <div class="top-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="7304161013"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="left-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="9243928640"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="4388824269"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="bottom-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="1430949430"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <video autoplay muted loop class="background-video">
         <source src="assets/background.mp4" type="video/mp4">
@@ -332,7 +408,7 @@
         });
 
         const phrases = [
-            "Skid Master"
+            "Skid Master.",
         ];
 
         const typingTextElement = document.getElementById('typing-text');
