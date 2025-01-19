@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scamexit</title>
+
+    <!-- AMP Auto Ads Script -->
+    <script async custom-element="amp-auto-ads"
+            src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -257,11 +263,13 @@
             }
         }
     </style>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335"
-        crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <!-- AMP Auto Ads Code -->
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-3636190139881335">
+    </amp-auto-ads>
 
     <video autoplay muted loop class="background-video">
         <source src="assets/background.mp4" type="video/mp4">
@@ -277,7 +285,6 @@
 
     <div class="content" id="content">
         <div class="profile-container">
-            
             <div class="avatar-container">
                 <img src="assets/avatar.gif" alt="scamexit Avatar" class="avatar">
             </div>
@@ -325,7 +332,7 @@
         });
 
         const phrases = [
-            "Skid Club"
+            "Skid Master"
         ];
 
         const typingTextElement = document.getElementById('typing-text');
