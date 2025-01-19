@@ -66,7 +66,6 @@
             width: 100%;
         }
 
-        
         .profile-container {
             text-align: center;
             color: white;
@@ -258,6 +257,9 @@
             }
         }
     </style>
+    <!-- Google AdSense script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335"
+        crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -316,7 +318,6 @@
     </div>
 
     <script>
-
         document.querySelector('#overlay').addEventListener('click', function() {
             this.classList.add('hidden');
             document.querySelector('#content').style.display = 'block';
@@ -339,20 +340,16 @@
             const delay = isDeleting ? 50 : 100;
 
             if (!isDeleting && currentCharIndex < currentPhrase.length) {
-                
                 typingTextElement.textContent += currentPhrase[currentCharIndex];
                 currentCharIndex++;
             } else if (isDeleting && currentCharIndex > 0) {
-                
                 typingTextElement.textContent = currentPhrase.slice(0, currentCharIndex - 1);
                 currentCharIndex--;
             } else if (!isDeleting && currentCharIndex === currentPhrase.length) {
-                
                 isDeleting = true;
                 setTimeout(type, 1000);
                 return;
             } else if (isDeleting && currentCharIndex === 0) {
-                
                 isDeleting = false;
                 currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
             }
