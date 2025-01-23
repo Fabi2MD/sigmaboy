@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
@@ -27,6 +27,7 @@
             background-color: #000;
         }
 
+        /* Background Video */
         .background-video {
             position: absolute;
             top: 0;
@@ -35,19 +36,10 @@
             height: 100%;
             object-fit: cover;
             z-index: -3;
-            filter: blur(8px);
-            animation: videoFadeIn 1s ease-in-out;
+            filter: blur(5px);
         }
 
-        @keyframes videoFadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
+        /* Overlay Screen */
         .overlay {
             position: absolute;
             top: 0;
@@ -63,7 +55,6 @@
             text-align: center;
             z-index: 2;
             transition: opacity 0.5s ease;
-            opacity: 1;
         }
 
         .overlay.hidden {
@@ -71,10 +62,12 @@
             visibility: hidden;
         }
 
+        /* Content Layout */
         .content {
             position: relative;
             z-index: 3;
             text-align: center;
+            display: none;
             color: white;
             max-width: 350px;
             width: 100%;
@@ -82,41 +75,28 @@
 
         .profile-container {
             text-align: center;
-            color: white;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
             max-width: 350px;
             width: 100%;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             position: relative;
             margin-top: 20px;
+            z-index: 4;
             min-height: 400px;
             transition: min-height 0.3s ease;
-            animation: profileFadeIn 1s ease-in-out;
-        }
-
-        @keyframes profileFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .avatar-container {
             position: relative;
             display: inline-block;
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             overflow: hidden;
             margin: 0 auto;
             animation: spinAvatar 10s linear infinite;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes spinAvatar {
@@ -135,10 +115,10 @@
         }
 
         .username {
-            font-size: 2.8rem;
-            margin-top: 15px;
+            font-size: 2.5rem;
+            margin-top: 5px;
             text-transform: capitalize;
-            font-weight: 700;
+            font-weight: 600;
             position: relative;
             display: inline-block;
         }
@@ -160,21 +140,23 @@
 
         .username:hover .uid {
             opacity: 1;
+            animation: fadeIn 0.5s ease;
         }
 
+        /* Badge Container */
         .badges-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 5px;
             flex-wrap: wrap;
         }
 
         .badge {
             position: relative;
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 5px;
             transition: transform 0.3s ease;
         }
@@ -207,14 +189,16 @@
         }
 
         .badge:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
         }
 
+        /* Profile Description */
         .profile-description {
             margin-top: 20px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
+        /* Horizontal Line */
         .line {
             width: 80%;
             height: 2px;
@@ -222,16 +206,17 @@
             margin: 20px auto;
         }
 
+        /* Social Icons */
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .social-icons .icon {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background-color: transparent;
             position: relative;
             transition: transform 0.3s ease;
@@ -273,6 +258,16 @@
             animation: fadeIn 0.5s ease;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Ads Styling */
         .left-ad, .right-ad, .top-ad, .bottom-ad {
             z-index: 9999;
         }
@@ -303,6 +298,24 @@
             bottom: 0;
             left: 0;
             width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .username {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -350,7 +363,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="1430949430"
+             data-ad-slot="3706027841"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -358,98 +371,64 @@
         </script>
     </div>
 
-    <video autoplay muted loop class="background-video">
-        <source src="assets/background.mp4" type="video/mp4">
-    </video>
-
-    <audio id="background-music" loop>
-        <source src="https://r2-bios.e-z.host/83207551-6b72-4f4c-8866-d3bc38b7317e/l99xsjnbtl.mp3" type="audio/mp3">
+    <audio id="background-audio" loop autoplay>
+        <source src="your-music-url.mp3" type="audio/mp3">
     </audio>
 
-    <div class="overlay" id="overlay">
-        <span>[Hey! Click To Enter]</span>
+    <video class="background-video" autoplay muted loop>
+        <source src="your-video-url.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay hidden">
+        Welcome to the page
     </div>
 
-    <div class="content" id="content">
+    <div class="content">
         <div class="profile-container">
             <div class="avatar-container">
-                <img src="assets/avatar.gif" alt="scamexit Avatar" class="avatar">
+                <img class="avatar" src="your-avatar-image.jpg" alt="Avatar">
             </div>
-
-            <div class="username">
-                Scam Exit
-                <div class="uid">UID: 0</div>
+            <div class="username">scamexit
+                <span class="uid">UID: 123456789</span>
             </div>
 
             <div class="badges-container">
-                <div class="badge" title="Owner">
-                    <img src="assets/owner.png" alt="Owner Badge">
-                    <div class="badge-name">Owner Badge</div>
+                <div class="badge">
+                    <img src="badge1.jpg" alt="Badge 1">
+                    <span class="badge-name">Badge Name</span>
                 </div>
-                <div class="badge" title="Dev">
-                    <img src="assets/dev.png" alt="Developer Badge">
-                    <div class="badge-name">Dev Badge</div>
-                </div>
-                <div class="badge" title="Staff">
-                    <img src="assets/staff.png" alt="Staff Badge">
-                    <div class="badge-name">Staff Badge</div>
-                </div>
+                <!-- Add more badges as needed -->
             </div>
 
-            <p class="profile-description">
-                <span id="typing-text"></span>
-            </p>
+            <div class="profile-description">
+                Short description of the profile goes here.
+            </div>
 
             <div class="line"></div>
 
             <div class="social-icons">
-                <div class="icon" onclick="window.open('https://github.com', '_blank');">
-                    <img src="assets/github.png" alt="GitHub">
-                    <div class="social-name">GitHub</div>
+                <div class="icon">
+                    <img src="twitter-icon.png" alt="Twitter">
+                    <span class="social-name">Twitter</span>
+                </div>
+                <div class="icon">
+                    <img src="discord-icon.png" alt="Discord">
+                    <span class="social-name">Discord</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        document.querySelector('#overlay').addEventListener('click', function() {
-            this.classList.add('hidden');
-            document.querySelector('#content').style.display = 'block';
-            document.querySelector('#background-music').play();
-        });
+        window.onload = function() {
+            setTimeout(function() {
+                document.querySelector('.overlay').classList.add('hidden');
+                document.querySelector('.content').style.display = 'block';
+            }, 3000);
+        };
 
-        const phrases = [
-            "Skid Master.",
-        ];
-
-        const typingTextElement = document.getElementById('typing-text');
-        let currentPhraseIndex = 0;
-        let currentCharIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[currentPhraseIndex];
-            const delay = isDeleting ? 50 : 100;
-
-            if (!isDeleting && currentCharIndex < currentPhrase.length) {
-                typingTextElement.textContent += currentPhrase[currentCharIndex];
-                currentCharIndex++;
-            } else if (isDeleting && currentCharIndex > 0) {
-                typingTextElement.textContent = currentPhrase.slice(0, currentCharIndex - 1);
-                currentCharIndex--;
-            } else if (!isDeleting && currentCharIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(type, 1000);
-                return;
-            } else if (isDeleting && currentCharIndex === 0) {
-                isDeleting = false;
-                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-            }
-
-            setTimeout(type, delay);
-        }
-
-        setTimeout(type, 500);
+        let audio = document.getElementById('background-audio');
+        audio.play();
     </script>
 
 </body>
