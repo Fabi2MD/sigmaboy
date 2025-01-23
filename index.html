@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scamexit - scamex1t</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335" crossorigin="anonymous"></script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+            filter: blur(8px);
+            animation: videoFadeIn 1s ease-in-out;
+        }
+
+        @keyframes videoFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        .overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .profile-container {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            position: relative;
+            margin-top: 20px;
+            min-height: 400px;
+            transition: min-height 0.3s ease;
+            animation: profileFadeIn 1s ease-in-out;
+        }
+
+        @keyframes profileFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            animation: spinAvatar 10s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes spinAvatar {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 2.8rem;
+            margin-top: 15px;
+            text-transform: capitalize;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .uid {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .username:hover .uid {
+            opacity: 1;
+        }
+
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge-name {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .badge:hover .badge-name {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-8px);
+        }
+
+        .profile-description {
+            margin-top: 20px;
+            font-size: 1.3rem;
+        }
+
+        .line {
+            width: 80%;
+            height: 2px;
+            background-color: white;
+            margin: 20px auto;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-icons .icon {
+            width: 45px;
+            height: 45px;
+            background-color: transparent;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons .icon:hover img {
+            transform: scale(1.1);
+        }
+
+        .social-icons .icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-icons .icon .social-name {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .social-icons .icon:hover .social-name {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .left-ad, .right-ad, .top-ad, .bottom-ad {
+            z-index: 9999;
+        }
+
+        .left-ad {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .right-ad {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .top-ad {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .bottom-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-3636190139881335"></amp-auto-ads>
+
+    <div class="top-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="7304161013"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="left-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="9243928640"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="4388824269"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="bottom-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3636190139881335"
+             data-ad-slot="1430949430"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <video autoplay muted loop class="background-video">
+        <source src="assets/background.mp4" type="video/mp4">
+    </video>
+
+    <audio id="background-music" loop>
+        <source src="https://r2-bios.e-z.host/83207551-6b72-4f4c-8866-d3bc38b7317e/l99xsjnbtl.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="overlay" id="overlay">
+        <span>[Hey! Click To Enter]</span>
+    </div>
+
+    <div class="content" id="content">
+        <div class="profile-container">
+            <div class="avatar-container">
+                <img src="assets/avatar.gif" alt="scamexit Avatar" class="avatar">
+            </div>
+
+            <div class="username">
+                Scam Exit
+                <div class="uid">UID: 0</div>
+            </div>
+
+            <div class="badges-container">
+                <div class="badge" title="Owner">
+                    <img src="assets/owner.png" alt="Owner Badge">
+                    <div class="badge-name">Owner Badge</div>
+                </div>
+                <div class="badge" title="Dev">
+                    <img src="assets/dev.png" alt="Developer Badge">
+                    <div class="badge-name">Dev Badge</div>
+                </div>
+                <div class="badge" title="Staff">
+                    <img src="assets/staff.png" alt="Staff Badge">
+                    <div class="badge-name">Staff Badge</div>
+                </div>
+            </div>
+
+            <p class="profile-description">
+                <span id="typing-text"></span>
+            </p>
+
+            <div class="line"></div>
+
+            <div class="social-icons">
+                <div class="icon" onclick="window.open('https://github.com', '_blank');">
+                    <img src="assets/github.png" alt="GitHub">
+                    <div class="social-name">GitHub</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#overlay').addEventListener('click', function() {
+            this.classList.add('hidden');
+            document.querySelector('#content').style.display = 'block';
+            document.querySelector('#background-music').play();
+        });
+
+        const phrases = [
+            "Skid Master.",
+        ];
+
+        const typingTextElement = document.getElementById('typing-text');
+        let currentPhraseIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[currentPhraseIndex];
+            const delay = isDeleting ? 50 : 100;
+
+            if (!isDeleting && currentCharIndex < currentPhrase.length) {
+                typingTextElement.textContent += currentPhrase[currentCharIndex];
+                currentCharIndex++;
+            } else if (isDeleting && currentCharIndex > 0) {
+                typingTextElement.textContent = currentPhrase.slice(0, currentCharIndex - 1);
+                currentCharIndex--;
+            } else if (!isDeleting && currentCharIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 1000);
+                return;
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            }
+
+            setTimeout(type, delay);
+        }
+
+        setTimeout(type, 500);
+    </script>
+
+</body>
+</html>
