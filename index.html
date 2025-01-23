@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>scamexit - scamex1t</title>
+    <meta name="description" content="Scamexit's personal profile page with dynamic content and social links.">
+    <meta name="keywords" content="Scamexit, profile, social media, badges, background video">
+    <meta name="author" content="Scamexit">
+    <title>Scamexit - Profile Page</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335" crossorigin="anonymous"></script>
+
     <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
     <style>
@@ -27,7 +31,6 @@
             background-color: #000;
         }
 
-        /* Background Video */
         .background-video {
             position: absolute;
             top: 0;
@@ -39,7 +42,6 @@
             filter: blur(5px);
         }
 
-        /* Overlay Screen */
         .overlay {
             position: absolute;
             top: 0;
@@ -62,7 +64,6 @@
             visibility: hidden;
         }
 
-        /* Content Layout */
         .content {
             position: relative;
             z-index: 3;
@@ -75,6 +76,7 @@
 
         .profile-container {
             text-align: center;
+            color: white;
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
@@ -143,7 +145,6 @@
             animation: fadeIn 0.5s ease;
         }
 
-        /* Badge Container */
         .badges-container {
             display: flex;
             justify-content: center;
@@ -192,13 +193,11 @@
             transform: translateY(-5px);
         }
 
-        /* Profile Description */
         .profile-description {
             margin-top: 20px;
             font-size: 1.2rem;
         }
 
-        /* Horizontal Line */
         .line {
             width: 80%;
             height: 2px;
@@ -206,7 +205,6 @@
             margin: 20px auto;
         }
 
-        /* Social Icons */
         .social-icons {
             display: flex;
             justify-content: center;
@@ -267,7 +265,6 @@
             }
         }
 
-        /* Ads Styling */
         .left-ad, .right-ad, .top-ad, .bottom-ad {
             z-index: 9999;
         }
@@ -300,22 +297,24 @@
             width: 100%;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-                width: 100%;
-                max-width: 300px;
+            .profile-container {
+                max-width: 90%;
+                padding: 15px;
             }
 
-            .avatar-container {
-                width: 120px;
-                height: 120px;
+            .social-icons {
+                gap: 10px;
             }
+        }
 
-            .username {
-                font-size: 2rem;
-            }
+        /* Lazy load improvements */
+        .lazyload {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .lazyloaded {
+            opacity: 1;
         }
     </style>
 </head>
@@ -363,7 +362,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="3706027841"
+             data-ad-slot="1430949430"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -371,64 +370,98 @@
         </script>
     </div>
 
-    <audio id="background-audio" loop autoplay>
-        <source src="your-music-url.mp3" type="audio/mp3">
-    </audio>
-
-    <video class="background-video" autoplay muted loop>
-        <source src="your-video-url.mp4" type="video/mp4">
+    <video autoplay muted loop class="background-video">
+        <source src="assets/background.mp4" type="video/mp4" />
     </video>
 
-    <div class="overlay hidden">
-        Welcome to the page
+    <audio id="background-music" loop>
+        <source src="https://r2-bios.e-z.host/83207551-6b72-4f4c-8866-d3bc38b7317e/l99xsjnbtl.mp3" type="audio/mp3" />
+    </audio>
+
+    <div class="overlay" id="overlay">
+        <span>[Hey! Click To Enter]</span>
     </div>
 
-    <div class="content">
+    <div class="content" id="content">
         <div class="profile-container">
             <div class="avatar-container">
-                <img class="avatar" src="your-avatar-image.jpg" alt="Avatar">
+                <img src="assets/avatar.gif" alt="Scamexit Avatar" class="avatar lazyload">
             </div>
-            <div class="username">scamexit
-                <span class="uid">UID: 123456789</span>
+
+            <div class="username">
+                Scam Exit
+                <div class="uid">UID: 0</div>
             </div>
 
             <div class="badges-container">
-                <div class="badge">
-                    <img src="badge1.jpg" alt="Badge 1">
-                    <span class="badge-name">Badge Name</span>
+                <div class="badge" title="Owner">
+                    <img src="assets/owner.png" alt="Owner Badge" class="lazyload">
+                    <div class="badge-name">Owner Badge</div>
                 </div>
-                <!-- Add more badges as needed -->
+                <div class="badge" title="Dev">
+                    <img src="assets/dev.png" alt="Developer Badge" class="lazyload">
+                    <div class="badge-name">Dev Badge</div>
+                </div>
+                <div class="badge" title="Staff">
+                    <img src="assets/staff.png" alt="Staff Badge" class="lazyload">
+                    <div class="badge-name">Staff Badge</div>
+                </div>
             </div>
 
-            <div class="profile-description">
-                Short description of the profile goes here.
-            </div>
+            <p class="profile-description">
+                <span id="typing-text"></span>
+            </p>
 
             <div class="line"></div>
 
             <div class="social-icons">
-                <div class="icon">
-                    <img src="twitter-icon.png" alt="Twitter">
-                    <span class="social-name">Twitter</span>
-                </div>
-                <div class="icon">
-                    <img src="discord-icon.png" alt="Discord">
-                    <span class="social-name">Discord</span>
+                <div class="icon" onclick="window.open('https://github.com', '_blank');">
+                    <img src="assets/github.png" alt="GitHub" />
+                    <div class="social-name">GitHub</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        window.onload = function() {
-            setTimeout(function() {
-                document.querySelector('.overlay').classList.add('hidden');
-                document.querySelector('.content').style.display = 'block';
-            }, 3000);
-        };
+        document.querySelector('#overlay').addEventListener('click', function() {
+            this.classList.add('hidden');
+            document.querySelector('#content').style.display = 'block';
+            document.querySelector('#background-music').play();
+        });
 
-        let audio = document.getElementById('background-audio');
-        audio.play();
+        const phrases = [
+            "Skid Master.",
+        ];
+
+        const typingTextElement = document.getElementById('typing-text');
+        let currentPhraseIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[currentPhraseIndex];
+            const delay = isDeleting ? 50 : 100;
+
+            if (!isDeleting && currentCharIndex < currentPhrase.length) {
+                typingTextElement.textContent += currentPhrase[currentCharIndex];
+                currentCharIndex++;
+            } else if (isDeleting && currentCharIndex > 0) {
+                typingTextElement.textContent = currentPhrase.slice(0, currentCharIndex - 1);
+                currentCharIndex--;
+            } else if (!isDeleting && currentCharIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 1000);
+                return;
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            }
+
+            setTimeout(type, delay);
+        }
+
+        setTimeout(type, 500);
     </script>
 
 </body>
