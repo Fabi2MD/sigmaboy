@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Scamexit's personal profile page with dynamic content and social links.">
-    <meta name="keywords" content="Scamexit, profile, social media, badges, background video">
+    <meta name="description" content="Scamexit's premium profile page with dynamic content and social links.">
+    <meta name="keywords" content="Scamexit, profile, social media, premium design, badges, background video">
     <meta name="author" content="Scamexit">
-    <title>Scamexit - Profile Page</title>
+    <title>Scamexit - Premium Profile</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335" crossorigin="anonymous"></script>
-
-    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         body {
@@ -28,7 +26,8 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background-color: #000;
+            background-color: #111;
+            color: #f5f5f5;
         }
 
         .background-video {
@@ -39,7 +38,8 @@
             height: 100%;
             object-fit: cover;
             z-index: -3;
-            filter: blur(5px);
+            filter: blur(8px);
+            transition: filter 0.5s ease-in-out;
         }
 
         .overlay {
@@ -56,6 +56,8 @@
             font-size: 3rem;
             text-align: center;
             z-index: 2;
+            opacity: 1;
+            visibility: visible;
             transition: opacity 0.5s ease;
         }
 
@@ -65,49 +67,46 @@
         }
 
         .content {
-            position: relative;
-            z-index: 3;
             text-align: center;
             display: none;
-            color: white;
-            max-width: 350px;
+            max-width: 400px;
             width: 100%;
+            position: relative;
+            z-index: 3;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
         }
 
         .profile-container {
             text-align: center;
             color: white;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            max-width: 350px;
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
             width: 100%;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
             position: relative;
-            margin-top: 20px;
+            margin-top: 30px;
             z-index: 4;
-            min-height: 400px;
-            transition: min-height 0.3s ease;
+            min-height: 500px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .profile-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
         }
 
         .avatar-container {
             position: relative;
             display: inline-block;
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             overflow: hidden;
             margin: 0 auto;
-            animation: spinAvatar 10s linear infinite;
-        }
-
-        @keyframes spinAvatar {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
         }
 
         .avatar {
@@ -117,12 +116,11 @@
         }
 
         .username {
-            font-size: 2.5rem;
-            margin-top: 5px;
+            font-size: 2.8rem;
+            font-weight: 700;
             text-transform: capitalize;
-            font-weight: 600;
             position: relative;
-            display: inline-block;
+            margin-top: 15px;
         }
 
         .uid {
@@ -131,8 +129,8 @@
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 5px;
-            border-radius: 5px;
+            padding: 8px;
+            border-radius: 6px;
             font-size: 1rem;
             color: white;
             opacity: 0;
@@ -142,24 +140,22 @@
 
         .username:hover .uid {
             opacity: 1;
-            animation: fadeIn 0.5s ease;
         }
 
         .badges-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 5px;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .badge {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 5px;
-            transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .badge img {
@@ -170,60 +166,56 @@
 
         .badge-name {
             position: absolute;
-            top: -30px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 5px;
-            border-radius: 5px;
+            padding: 6px;
+            border-radius: 6px;
             font-size: 1rem;
             color: white;
             opacity: 0;
             transition: opacity 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
         }
 
         .badge:hover .badge-name {
             opacity: 1;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .badge:hover {
-            transform: translateY(-5px);
         }
 
         .profile-description {
             margin-top: 20px;
             font-size: 1.2rem;
+            line-height: 1.6;
         }
 
         .line {
-            width: 80%;
+            width: 90%;
             height: 2px;
-            background-color: white;
-            margin: 20px auto;
+            background-color: #ffb700;
+            margin: 25px auto;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .social-icons .icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: transparent;
             position: relative;
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .social-icons .icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            border-radius: 50%;
             transition: transform 0.3s ease;
         }
 
@@ -232,95 +224,60 @@
         }
 
         .social-icons .icon:hover {
-            transform: translateY(-5px);
+            transform: translateY(-7px);
         }
 
         .social-icons .icon .social-name {
             position: absolute;
-            top: -30px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 5px;
-            border-radius: 5px;
+            padding: 6px;
+            border-radius: 6px;
             font-size: 1rem;
             color: white;
             opacity: 0;
             transition: opacity 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
         }
 
         .social-icons .icon:hover .social-name {
             opacity: 1;
-            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                max-width: 85%;
+                padding: 25px;
+            }
+
+            .social-icons {
+                gap: 15px;
+            }
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        .left-ad, .right-ad, .top-ad, .bottom-ad {
-            z-index: 9999;
-        }
-
-        .left-ad {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .right-ad {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .top-ad {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .bottom-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .profile-container {
-                max-width: 90%;
-                padding: 15px;
-            }
-
-            .social-icons {
-                gap: 10px;
-            }
-        }
-
-        /* Lazy load improvements */
         .lazyload {
             opacity: 0;
             transition: opacity 1s ease-in;
         }
+
         .lazyloaded {
             opacity: 1;
         }
     </style>
 </head>
 <body>
-
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-3636190139881335"></amp-auto-ads>
 
     <div class="top-ad">
         <ins class="adsbygoogle"
@@ -350,7 +307,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="4388824269"
+             data-ad-slot="9243928640"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -358,65 +315,47 @@
         </script>
     </div>
 
-    <div class="bottom-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="1430949430"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <video autoplay muted loop class="background-video">
-        <source src="assets/background.mp4" type="video/mp4" />
+    <video class="background-video" autoplay loop muted>
+        <source src="background-video.mp4" type="video/mp4">
     </video>
 
-    <audio id="background-music" loop>
-        <source src="https://r2-bios.e-z.host/83207551-6b72-4f4c-8866-d3bc38b7317e/l99xsjnbtl.mp3" type="audio/mp3" />
-    </audio>
-
     <div class="overlay" id="overlay">
-        <span>[Hey! Click To Enter]</span>
+        <p>Click anywhere to enter</p>
     </div>
 
-    <div class="content" id="content">
+    <div class="content">
         <div class="profile-container">
             <div class="avatar-container">
-                <img src="assets/avatar.gif" alt="Scamexit Avatar" class="avatar lazyload">
+                <img class="avatar lazyload" data-src="profile-avatar.jpg" alt="Avatar" />
             </div>
-
-            <div class="username">
-                Scam Exit
-                <div class="uid">UID: 0</div>
-            </div>
-
+            <h2 class="username">Scamexit <span class="uid">#123456</span></h2>
             <div class="badges-container">
-                <div class="badge" title="Owner">
-                    <img src="assets/owner.png" alt="Owner Badge" class="lazyload">
-                    <div class="badge-name">Owner Badge</div>
+                <!-- Badge 1 -->
+                <div class="badge">
+                    <img src="badge1.png" alt="Badge 1" />
+                    <div class="badge-name">Admin</div>
                 </div>
-                <div class="badge" title="Dev">
-                    <img src="assets/dev.png" alt="Developer Badge" class="lazyload">
-                    <div class="badge-name">Dev Badge</div>
-                </div>
-                <div class="badge" title="Staff">
-                    <img src="assets/staff.png" alt="Staff Badge" class="lazyload">
-                    <div class="badge-name">Staff Badge</div>
+                <!-- Badge 2 -->
+                <div class="badge">
+                    <img src="badge2.png" alt="Badge 2" />
+                    <div class="badge-name">Pro</div>
                 </div>
             </div>
-
             <p class="profile-description">
-                <span id="typing-text"></span>
+                Passionate developer. Always improving and evolving. Let's create something amazing together.
             </p>
-
             <div class="line"></div>
-
             <div class="social-icons">
-                <div class="icon" onclick="window.open('https://github.com', '_blank');">
-                    <img src="assets/github.png" alt="GitHub" />
+                <div class="icon">
+                    <img src="twitter-icon.png" alt="Twitter" />
+                    <div class="social-name">Twitter</div>
+                </div>
+                <div class="icon">
+                    <img src="discord-icon.png" alt="Discord" />
+                    <div class="social-name">Discord</div>
+                </div>
+                <div class="icon">
+                    <img src="github-icon.png" alt="GitHub" />
                     <div class="social-name">GitHub</div>
                 </div>
             </div>
@@ -424,45 +363,19 @@
     </div>
 
     <script>
-        document.querySelector('#overlay').addEventListener('click', function() {
-            this.classList.add('hidden');
-            document.querySelector('#content').style.display = 'block';
-            document.querySelector('#background-music').play();
+        // Show the content after clicking anywhere
+        document.getElementById('overlay').addEventListener('click', function () {
+            document.getElementById('overlay').classList.add('hidden');
+            document.querySelector('.content').style.display = 'block';
         });
 
-        const phrases = [
-            "Skid Master.",
-        ];
-
-        const typingTextElement = document.getElementById('typing-text');
-        let currentPhraseIndex = 0;
-        let currentCharIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[currentPhraseIndex];
-            const delay = isDeleting ? 50 : 100;
-
-            if (!isDeleting && currentCharIndex < currentPhrase.length) {
-                typingTextElement.textContent += currentPhrase[currentCharIndex];
-                currentCharIndex++;
-            } else if (isDeleting && currentCharIndex > 0) {
-                typingTextElement.textContent = currentPhrase.slice(0, currentCharIndex - 1);
-                currentCharIndex--;
-            } else if (!isDeleting && currentCharIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(type, 1000);
-                return;
-            } else if (isDeleting && currentCharIndex === 0) {
-                isDeleting = false;
-                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-            }
-
-            setTimeout(type, delay);
-        }
-
-        setTimeout(type, 500);
+        // Lazyload images
+        document.querySelectorAll('.lazyload').forEach(function (img) {
+            img.onload = function () {
+                img.classList.add('lazyloaded');
+            };
+            img.src = img.getAttribute('data-src');
+        });
     </script>
-
 </body>
 </html>
