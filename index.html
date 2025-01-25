@@ -342,17 +342,17 @@
             document.querySelector('#content').style.display = 'block';
             document.querySelector('#background-music').play();
         });
-
+    
         const phrases = ["Skid Master."];
         const typingTextElement = document.getElementById('typing-text');
         let currentPhraseIndex = 0;
         let currentCharIndex = 0;
         let isDeleting = false;
-
+    
         function type() {
             const currentPhrase = phrases[currentPhraseIndex];
             const delay = isDeleting ? 50 : 100;
-
+    
             if (!isDeleting && currentCharIndex < currentPhrase.length) {
                 typingTextElement.textContent += currentPhrase[currentCharIndex];
                 currentCharIndex++;
@@ -367,39 +367,39 @@
                 isDeleting = false;
                 currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
             }
-
+    
             setTimeout(type, delay);
         }
-
+    
         setTimeout(type, 500);
-
+    
         const profileContainer = document.getElementById('profile-container');
+        let rotateY = 0;
+        let rotateX = 0;
+    
         profileContainer.addEventListener('mousemove', function (e) {
             const rect = profileContainer.getBoundingClientRect();
             const sensitivity = 42;
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
-            const rotateX = ((y / rect.height) - 0.5) * sensitivity;
-            const rotateY = ((x / rect.width) - 0.5) * -sensitivity;
-
+    
+            rotateX = ((y / rect.height) - 0.5) * sensitivity;
+            rotateY = ((x / rect.width) - 0.5) * -sensitivity;
+    
             profileContainer.style.setProperty('--xv', `${rotateX}deg`);
             profileContainer.style.setProperty('--yv', `${rotateY}deg`);
-
         });
-
+    
         profileContainer.addEventListener('mouseleave', function () {
-            profileContainer.style.setProperty('--xv', `0deg`);
-            profileContainer.style.setProperty('--yv', `${rotateY}deg`);
-
+            setTimeout(() => {
+                profileContainer.style.setProperty('--xv', `0deg`);
+                profileContainer.style.setProperty('--yv', `0deg`);
+            }, 150);
         });
-
+    
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = `${e.pageX - 7.5}px`;
             cursor.style.top = `${e.pageY - 7.5}px`;
         });
     </script>
-
-</body>
-</html>
