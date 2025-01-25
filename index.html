@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scamexit - scamex1t</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3636190139881335" crossorigin="anonymous"></script>
-
-    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
-
     <style>
         * {
             margin: 0;
@@ -85,6 +81,14 @@
             z-index: 4;
             min-height: 400px;
             transition: min-height 0.3s ease;
+            transform: perspective(1000px) rotateX(var(--xv)) rotateY(var(--yv));
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        :root {
+            --xv: 0deg;
+            --yv: 0deg;
         }
 
         .avatar-container {
@@ -261,91 +265,9 @@
                 opacity: 1;
             }
         }
-
-        .left-ad, .right-ad, .top-ad, .bottom-ad {
-            z-index: 9999;
-        }
-
-        .left-ad {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .right-ad {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .top-ad {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .bottom-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
-
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-3636190139881335"></amp-auto-ads>
-
-    <div class="top-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="7304161013"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <div class="left-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="9243928640"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <div class="right-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="4388824269"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <div class="bottom-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3636190139881335"
-             data-ad-slot="1430949430"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 
     <video autoplay muted loop class="background-video">
         <source src="assets/background.mp4" type="video/mp4">
@@ -360,7 +282,7 @@
     </div>
 
     <div class="content" id="content">
-        <div class="profile-container">
+        <div class="profile-container" id="profile-container">
             <div class="avatar-container">
                 <img src="assets/avatar.gif" alt="scamexit Avatar" class="avatar">
             </div>
@@ -407,10 +329,7 @@
             document.querySelector('#background-music').play();
         });
 
-        const phrases = [
-            "Skid Master.",
-        ];
-
+        const phrases = ["Skid Master."];
         const typingTextElement = document.getElementById('typing-text');
         let currentPhraseIndex = 0;
         let currentCharIndex = 0;
@@ -439,6 +358,25 @@
         }
 
         setTimeout(type, 500);
+
+        const profileContainer = document.getElementById('profile-container');
+        profileContainer.addEventListener('mousemove', function (e) {
+            const rect = profileContainer.getBoundingClientRect();
+            const sensitivity = 42;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const rotateX = ((y / rect.height) - 0.5) * sensitivity;
+            const rotateY = ((x / rect.width) - 0.5) * -sensitivity;
+
+            profileContainer.style.setProperty('--xv', `${rotateX}deg`);
+            profileContainer.style.setProperty('--yv', `${rotateY}deg`);
+        });
+
+        profileContainer.addEventListener('mouseleave', function () {
+            profileContainer.style.setProperty('--xv', `0deg`);
+            profileContainer.style.setProperty('--yv', `0deg`);
+        });
     </script>
 
 </body>
